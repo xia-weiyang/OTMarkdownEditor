@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Rich</string>
+    <string name="rich_name">富文本</string>
+
+    <string name="action_reference">语法参考?</string>
 </resources>
