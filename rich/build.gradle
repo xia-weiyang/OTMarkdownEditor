@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.guowang0'
+
 
 android {
     compileSdkVersion 25
@@ -29,5 +32,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.zzhoujay.richtext:richtext:2.5.2'
+    compile 'ren.qinc.edit:lib:0.0.5'
+    compile 'net.cachapa.expandablelayout:expandablelayout:2.9.1'
     testCompile 'junit:junit:4.12'
 }

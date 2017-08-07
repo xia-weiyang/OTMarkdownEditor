@@ -8,7 +8,7 @@
         android:theme="@style/RichTheme"
         android:supportsRtl="true">
 
-        <activity android:name=".ui.EditActivity"
+        <activity android:name=".ui.EditorActivity"
             android:label="@string/rich_name"/>
         <activity android:name=".ui.PreviewActivity" />
 
