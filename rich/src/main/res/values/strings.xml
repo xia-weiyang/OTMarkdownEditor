@@ -2,4 +2,6 @@
     <string name="rich_name">富文本</string>
 
     <string name="action_reference">语法参考?</string>
+    <string name="action_preview">预览</string>
+    <string name="action_save">保存</string>
 </resources>
