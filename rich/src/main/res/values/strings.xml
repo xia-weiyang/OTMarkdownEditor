@@ -3,5 +3,6 @@
 
     <string name="action_reference">语法参考?</string>
     <string name="action_preview">预览</string>
+    <string name="action_more">更多</string>
     <string name="action_save">保存</string>
 </resources>

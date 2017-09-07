@@ -10,11 +10,15 @@ import android.widget.EditText;
 import com.jiushig.rich.BaseActivity;
 import com.jiushig.rich.R;
 
+import net.cachapa.expandablelayout.ExpandableLayout;
+
 
 public class EditorActivity extends BaseActivity {
 
     protected EditText title;
     protected EditText content;
+
+    private ExpandableLayout expandableLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +31,7 @@ public class EditorActivity extends BaseActivity {
     private void initViews() {
         title = (EditText) findViewById(R.id.title);
         content = (EditText) findViewById(R.id.content);
+        expandableLayout = (ExpandableLayout) findViewById(R.id.expandable_layout);
     }
 
     @Override
@@ -45,6 +50,8 @@ public class EditorActivity extends BaseActivity {
             clickReference();
         } else if (item.getItemId() == R.id.action_save) {
             save(title.getText().toString(), content.getText().toString());
+        } else if (item.getItemId() == R.id.action_more) {
+            expandableLayout.toggle();
         }
         return super.onOptionsItemSelected(item);
     }
