@@ -14,8 +14,8 @@ android {
         versionName "0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,11 +31,9 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
-    compile 'com.zzhoujay.richtext:richtext:2.5.2'
     compile 'ren.qinc.edit:lib:0.0.5'
     compile 'net.cachapa.expandablelayout:expandablelayout:2.9.1'
-
-    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+    compile 'com.vladsch.flexmark:flexmark-all:0.27.0'
 
     testCompile 'junit:junit:4.12'
 }

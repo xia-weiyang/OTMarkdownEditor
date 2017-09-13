@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.jiushig.rich.BaseActivity;
 import com.jiushig.rich.R;
+import com.jiushig.rich.utils.RichHandler;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -20,12 +21,18 @@ public class EditorActivity extends BaseActivity {
 
     private ExpandableLayout expandableLayout;
 
+    private RichHandler richHandler;
+
+    public final static int REQUEST_CODE_IMG = 4000;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
         setToolBar();
         initViews();
+
+        richHandler = new RichHandler(this, expandableLayout, content);
     }
 
     private void initViews() {

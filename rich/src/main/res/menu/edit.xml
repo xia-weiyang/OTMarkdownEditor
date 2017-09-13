@@ -4,6 +4,7 @@
 
     <item android:id="@+id/action_more"
         android:title="@string/action_more"
+        android:icon="@mipmap/ic_arrow_down"
         app:showAsAction="always"/>
 
     <item

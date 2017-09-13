@@ -3,11 +3,11 @@ package com.jiushig.rich.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.webkit.WebView;
 
 import com.jiushig.rich.BaseActivity;
 import com.jiushig.rich.R;
-import com.zzhoujay.richtext.RichText;
+import com.jiushig.rich.utils.MarkDownHandler;
 
 
 /**
@@ -16,6 +16,9 @@ import com.zzhoujay.richtext.RichText;
 
 public class PreviewActivity extends BaseActivity {
 
+    private String text;
+
+    private WebView webView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,13 +27,16 @@ public class PreviewActivity extends BaseActivity {
         setToolBar();
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        text = getIntent().getStringExtra("text");
+
         initViews();
 
+        webView.loadData(MarkDownHandler.getInstance().toHtml(text), "text/html", "utf-8");
     }
 
     private void initViews() {
-        TextView textView = (TextView) findViewById(R.id.text);
-        RichText.fromMarkdown(getIntent().getStringExtra("text")).into(textView);
+        webView = (WebView) findViewById(R.id.webView);
     }
 
     @Override
@@ -40,4 +46,5 @@ public class PreviewActivity extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
