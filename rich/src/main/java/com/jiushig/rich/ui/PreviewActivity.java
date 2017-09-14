@@ -1,13 +1,14 @@
 package com.jiushig.rich.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MenuItem;
-import android.webkit.WebView;
 
 import com.jiushig.rich.BaseActivity;
 import com.jiushig.rich.R;
-import com.jiushig.rich.utils.MarkDownHandler;
+import com.jiushig.rich.widget.RichView;
 
 
 /**
@@ -18,7 +19,7 @@ public class PreviewActivity extends BaseActivity {
 
     private String text;
 
-    private WebView webView;
+    private RichView richView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,11 +33,23 @@ public class PreviewActivity extends BaseActivity {
 
         initViews();
 
-        webView.loadData(MarkDownHandler.getInstance().toHtml(text), "text/html", "utf-8");
     }
 
     private void initViews() {
-        webView = (WebView) findViewById(R.id.webView);
+        richView = (RichView) findViewById(R.id.richView);
+
+        richView.setText(text);
+
+        richView.setListener(new RichView.LinkClickListener() {
+            @Override
+            public void click(String url) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(url);
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

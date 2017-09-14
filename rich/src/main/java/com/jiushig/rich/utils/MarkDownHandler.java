@@ -1,6 +1,9 @@
 package com.jiushig.rich.utils;
 
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -35,16 +38,23 @@ public class MarkDownHandler {
         return renderer.render(document);
     }
 
-//    public void toHtml(final String markdownText, final Callback callback) {
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                if (callback != null) {
-//                    callback.done(processor.markdownToHtml(markdownText));
-//                }
-//            }
-//        }.start();
-//    }
+    public void toHtml(final String markdownText, final Callback callback) {
+        new Thread() {
+            @Override
+            public void run() {
+                Node document = parser.parse(markdownText);
+                final String htm = renderer.render(document);
+                if (callback != null) {
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            callback.done(htm);
+                        }
+                    });
+                }
+            }
+        }.start();
+    }
 
     public interface Callback {
         void done(String html);
