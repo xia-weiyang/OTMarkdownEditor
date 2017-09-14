@@ -38,7 +38,7 @@ public class RichView extends WebView {
             @Override
             public void done(String html) {
                 if (html != null)
-                    loadData(html, "text/html", "utf-8");
+                    loadDataWithBaseURL(null, html, "text/html", "utf8mb4", null);
             }
         });
     }
@@ -49,6 +49,9 @@ public class RichView extends WebView {
 
     private void addClient() {
         setWebViewClient(new MyWebClient());
+
+        setHorizontalScrollBarEnabled(false);
+        setVerticalScrollBarEnabled(false);
     }
 
     public void setListener(LinkClickListener listener) {
