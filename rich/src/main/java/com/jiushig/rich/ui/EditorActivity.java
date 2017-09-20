@@ -32,6 +32,8 @@ public class EditorActivity extends BaseActivity {
         setToolBar();
         initViews();
 
+        getData();
+
         richHandler = new RichHandler(this, expandableLayout, content);
     }
 
@@ -40,6 +42,26 @@ public class EditorActivity extends BaseActivity {
         content = (EditText) findViewById(R.id.content);
         expandableLayout = (ExpandableLayout) findViewById(R.id.expandable_layout);
     }
+
+    private void getData() {
+        String title = getIntent().getStringExtra("title");
+        String text = getIntent().getStringExtra("text");
+        this.title.setText(title == null ? "" : title);
+        this.content.setText(text == null ? "" : text);
+    }
+
+    /**
+     * 获得启动此Activity的Intent
+     *
+     * @param title
+     * @param text
+     */
+    public static void getStartIntent(String title, String text) {
+        Intent intent = new Intent();
+        intent.putExtra("title", title);
+        intent.putExtra("text", text);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,19 +78,25 @@ public class EditorActivity extends BaseActivity {
         } else if (item.getItemId() == R.id.action_reference) {
             clickReference();
         } else if (item.getItemId() == R.id.action_save) {
-            save(title.getText().toString(), content.getText().toString());
+            clickSave(title.getText().toString(), content.getText().toString());
         } else if (item.getItemId() == R.id.action_more) {
             expandableLayout.toggle();
         }
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * 预览
+     */
     protected void clickPreview() {
         Intent intent = new Intent(this, PreviewActivity.class);
         intent.putExtra("text", content.getText().toString());
         startActivity(intent);
     }
 
+    /**
+     * 语法参考
+     */
     protected void clickReference() {
 
     }
@@ -79,7 +107,8 @@ public class EditorActivity extends BaseActivity {
      * @param title
      * @param content
      */
-    protected void save(String title, String content) {
+    protected void clickSave(String title, String content) {
 
     }
+
 }
