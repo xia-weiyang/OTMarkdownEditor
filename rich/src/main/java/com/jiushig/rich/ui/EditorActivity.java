@@ -16,8 +16,8 @@ import net.cachapa.expandablelayout.ExpandableLayout;
 
 public class EditorActivity extends BaseActivity {
 
-    protected EditText title;
-    protected EditText content;
+    protected EditText editTitle;
+    protected EditText editText;
 
     private ExpandableLayout expandableLayout;
 
@@ -34,20 +34,20 @@ public class EditorActivity extends BaseActivity {
 
         getData();
 
-        richHandler = new RichHandler(this, expandableLayout, content);
+        richHandler = new RichHandler(this, expandableLayout, editText);
     }
 
     private void initViews() {
-        title = (EditText) findViewById(R.id.title);
-        content = (EditText) findViewById(R.id.content);
+        editTitle = (EditText) findViewById(R.id.title);
+        editText = (EditText) findViewById(R.id.content);
         expandableLayout = (ExpandableLayout) findViewById(R.id.expandable_layout);
     }
 
     private void getData() {
         String title = getIntent().getStringExtra("title");
         String text = getIntent().getStringExtra("text");
-        this.title.setText(title == null ? "" : title);
-        this.content.setText(text == null ? "" : text);
+        this.editTitle.setText(title == null ? "" : title);
+        this.editText.setText(text == null ? "" : text);
     }
 
     /**
@@ -56,10 +56,11 @@ public class EditorActivity extends BaseActivity {
      * @param title
      * @param text
      */
-    public static void getStartIntent(String title, String text) {
+    public static Intent getStartIntent(String title, String text) {
         Intent intent = new Intent();
         intent.putExtra("title", title);
         intent.putExtra("text", text);
+        return intent;
     }
 
 
@@ -78,7 +79,7 @@ public class EditorActivity extends BaseActivity {
         } else if (item.getItemId() == R.id.action_reference) {
             clickReference();
         } else if (item.getItemId() == R.id.action_save) {
-            clickSave(title.getText().toString(), content.getText().toString());
+            clickSave(editTitle.getText().toString(), editText.getText().toString());
         } else if (item.getItemId() == R.id.action_more) {
             expandableLayout.toggle();
         }
@@ -90,7 +91,7 @@ public class EditorActivity extends BaseActivity {
      */
     protected void clickPreview() {
         Intent intent = new Intent(this, PreviewActivity.class);
-        intent.putExtra("text", content.getText().toString());
+        intent.putExtra("text", editText.getText().toString());
         startActivity(intent);
     }
 

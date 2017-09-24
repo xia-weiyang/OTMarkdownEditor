@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/root"
     android:focusable="true"
     android:focusableInTouchMode="true"
     tools:context="com.jiushig.rich.ui.EditorActivity">
@@ -31,7 +32,7 @@
         android:background="@color/colorPrimary"
         android:translationZ="10dp"
         app:el_duration="500"
-        app:el_expanded="true">
+        app:el_expanded="false">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -62,7 +63,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/appBarLayout">
 
         <LinearLayout
@@ -92,7 +93,7 @@
                 android:background="#0000"
                 android:gravity="top"
                 android:hint="开始你的记录.."
-                android:minHeight="300dp"
+                android:minHeight="100dp"
                 android:padding="10dp" />
 
         </LinearLayout>
