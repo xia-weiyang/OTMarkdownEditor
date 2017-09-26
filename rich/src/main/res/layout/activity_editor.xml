@@ -92,6 +92,7 @@
                 android:layout_height="match_parent"
                 android:background="#0000"
                 android:gravity="top"
+                android:textColor="@color/colorText"
                 android:hint="开始你的记录.."
                 android:minHeight="100dp"
                 android:padding="10dp" />

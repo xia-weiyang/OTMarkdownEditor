@@ -2,6 +2,8 @@
 
     package="com.jiushig.rich">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:label="@string/app_name"

@@ -19,7 +19,7 @@ public class PreviewActivity extends BaseActivity {
 
     private String text;
 
-    private RichView richView;
+    protected RichView richView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class PreviewActivity extends BaseActivity {
     private void initViews() {
         richView = (RichView) findViewById(R.id.richView);
 
-        richView.setText(text);
+        richView.setTextInBackground(text);
 
         richView.setListener(new RichView.LinkClickListener() {
             @Override

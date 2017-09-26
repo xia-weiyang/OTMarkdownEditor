@@ -3,6 +3,7 @@ package com.jiushig.rich.utils;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -14,6 +15,8 @@ import com.vladsch.flexmark.util.options.MutableDataSet;
  */
 
 public class MarkDownHandler {
+
+    private static final String TAG = MarkDownHandler.class.getSimpleName();
 
     private Parser parser;
     private HtmlRenderer renderer;
@@ -35,7 +38,10 @@ public class MarkDownHandler {
 
     public String toHtml(String markdownText) {
         Node document = parser.parse(markdownText);
-        return renderer.render(document);
+        String htm = renderer.render(document);
+        htm = disposeHtml(htm);
+        Log.d(TAG, htm);
+        return htm;
     }
 
     public void toHtml(final String markdownText, final Callback callback) {
@@ -43,17 +49,25 @@ public class MarkDownHandler {
             @Override
             public void run() {
                 Node document = parser.parse(markdownText);
-                final String htm = renderer.render(document);
+                String htm = renderer.render(document);
+                htm = disposeHtml(htm);
+                final String html = htm;
+                Log.d(TAG, htm);
                 if (callback != null) {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            callback.done(htm);
+                            callback.done(html);
                         }
                     });
                 }
             }
         }.start();
+    }
+
+    private String disposeHtml(String htm) {
+        htm = htm.replaceAll("<img src", "<img style='width:100%' src");
+        return htm;
     }
 
     public interface Callback {
