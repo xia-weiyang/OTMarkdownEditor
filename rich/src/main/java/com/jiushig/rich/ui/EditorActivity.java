@@ -1,6 +1,7 @@
 package com.jiushig.rich.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Menu;
@@ -9,9 +10,12 @@ import android.widget.EditText;
 
 import com.jiushig.rich.BaseActivity;
 import com.jiushig.rich.R;
+import com.jiushig.rich.utils.CommonUtils;
 import com.jiushig.rich.utils.RichHandler;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
+
+import java.io.File;
 
 
 public class EditorActivity extends BaseActivity {
@@ -86,6 +90,16 @@ public class EditorActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_IMG) {
+                richHandler.addImg(data.getData());
+            }
+        }
+    }
+
     /**
      * 预览
      */
@@ -106,9 +120,9 @@ public class EditorActivity extends BaseActivity {
      * 保存
      *
      * @param title
-     * @param content
+     * @param text
      */
-    protected void clickSave(String title, String content) {
+    protected void clickSave(String title, String text) {
 
     }
 

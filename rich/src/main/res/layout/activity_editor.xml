@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/root"
     android:focusable="true"
     android:focusableInTouchMode="true"
     tools:context="com.jiushig.rich.ui.EditorActivity">
@@ -24,80 +24,85 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <net.cachapa.expandablelayout.ExpandableLayout
-        android:id="@+id/expandable_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/appBarLayout"
-        android:background="@color/colorPrimary"
-        android:translationZ="10dp"
-        app:el_duration="500"
-        app:el_expanded="false">
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:orientation="horizontal"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp">
-
-                <ImageView
-                    android:id="@+id/edit_img"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:src="@mipmap/edit_img"
-                    android:layout_gravity="center_vertical"/>
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
-
-    </net.cachapa.expandablelayout.ExpandableLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/appBarLayout">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/title"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#0000"
-                android:hint="标题"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#ddd" />
+                <EditText
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#0000"
+                    android:hint="标题"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/content"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ddd" />
+
+                <EditText
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#0000"
+                    android:gravity="top"
+                    android:hint="开始你的记录.."
+                    android:minHeight="100dp"
+                    android:padding="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorText" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/expandable_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            app:el_duration="500"
+            app:el_expanded="false">
+
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#0000"
-                android:gravity="top"
-                android:textColor="@color/colorText"
-                android:hint="开始你的记录.."
-                android:minHeight="100dp"
-                android:padding="10dp" />
+                android:overScrollMode="never">
 
-        </LinearLayout>
-    </ScrollView>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp">
+
+                    <ImageView
+                        android:id="@+id/edit_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/edit_img" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>
