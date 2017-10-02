@@ -6,11 +6,16 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by zk on 2017/10/1.
  */
 
-public class CommonUtils {
+public class RichUtils {
 
     /**
      * 获取真实文件路径
@@ -40,5 +45,24 @@ public class CommonUtils {
             }
         }
         return data;
+    }
+
+    /**
+     * 得到html标签中的图片地址
+     *
+     * @param html
+     * @return
+     */
+    public static List<String> getImgUrl(String html) {
+        List<String> list = new ArrayList<>();
+        Pattern pattern = Pattern.compile("<a[^<]+</a>");
+        Matcher matcher = pattern.matcher(html);
+        while (matcher.find()) {
+            Matcher ms = Pattern.compile("href=['\"].+['\"]").matcher(matcher.group());
+            while (ms.find()) {
+                list.add(ms.group().replaceAll("['\"0]", "").replace("href=", ""));
+            }
+        }
+        return list;
     }
 }

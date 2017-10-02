@@ -1,7 +1,6 @@
 package com.jiushig.rich.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Menu;
@@ -10,12 +9,10 @@ import android.widget.EditText;
 
 import com.jiushig.rich.BaseActivity;
 import com.jiushig.rich.R;
-import com.jiushig.rich.utils.CommonUtils;
 import com.jiushig.rich.utils.RichHandler;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
-import java.io.File;
 
 
 public class EditorActivity extends BaseActivity {

@@ -62,8 +62,8 @@
                     android:hint="开始你的记录.."
                     android:minHeight="100dp"
                     android:padding="10dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorText" />
+                    android:textColor="@color/colorText"
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </ScrollView>
@@ -90,12 +90,93 @@
                     android:paddingStart="10dp">
 
                     <ImageView
+                        android:id="@+id/format_header_1"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_header_1_img" />
+
+                    <ImageView
+                        android:id="@+id/format_header_2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_header_2_img" />
+
+                    <ImageView
+                        android:id="@+id/format_header_3"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_header_3_img" />
+
+                    <ImageView
+                        android:id="@+id/format_header_4"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_header_4_img" />
+
+                    <ImageView
+                        android:id="@+id/format_header_5"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_header_5_img" />
+
+                    <ImageView
+                        android:id="@+id/format_bold"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_bold_img" />
+
+                    <ImageView
+                        android:id="@+id/format_italic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_italic_img" />
+
+                    <ImageView
+                        android:id="@+id/link"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/link_img" />
+
+                    <ImageView
                         android:id="@+id/edit_img"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="10dp"
                         android:src="@mipmap/edit_img" />
+
+                    <ImageView
+                        android:id="@+id/format_quote"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_quote_img" />
+
+                    <ImageView
+                        android:id="@+id/list"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/list_img" />
+
 
                 </LinearLayout>
 

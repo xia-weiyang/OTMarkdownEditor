@@ -6,5 +6,15 @@
     <string name="action_more">更多</string>
     <string name="action_save">保存</string>
 
-    <string name="edit_img">插入图片</string>
+    <string name="edit_img">图片</string>
+    <string name="format_bold">加粗</string>
+    <string name="format_italic">斜体</string>
+    <string name="format_header_1">一级标题</string>
+    <string name="format_header_2">二级标题</string>
+    <string name="format_header_3">三级标题</string>
+    <string name="format_header_4">四级标题</string>
+    <string name="format_header_5">五级标题</string>
+    <string name="format_quote">文字引用</string>
+    <string name="link">链接</string>
+    <string name="list">无序列表</string>
 </resources>
