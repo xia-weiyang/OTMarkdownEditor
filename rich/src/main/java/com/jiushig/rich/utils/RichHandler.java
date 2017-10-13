@@ -58,6 +58,8 @@ public class RichHandler implements View.OnClickListener, View.OnLongClickListen
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.edit_img) {
+            if (!Permission.storage(activity)) return;
+
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             activity.startActivityForResult(intent, EditorActivity.REQUEST_CODE_IMG);
