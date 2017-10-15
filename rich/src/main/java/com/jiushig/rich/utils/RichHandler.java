@@ -75,7 +75,7 @@ public class RichHandler implements View.OnClickListener, View.OnLongClickListen
             addFormatHeader3();
         } else if (v.getId() == R.id.format_header_4) {
             addFormatHeader4();
-        } else if (v.getId() == R.id.format_header_4) {
+        } else if (v.getId() == R.id.format_header_5) {
             addFormatHeader5();
         } else if (v.getId() == R.id.format_quote) {
             addFormatQuote();
