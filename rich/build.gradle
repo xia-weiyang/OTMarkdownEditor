@@ -5,7 +5,7 @@ group='com.github.guowang0'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         minSdkVersion 19

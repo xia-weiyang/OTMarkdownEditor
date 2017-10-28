@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class Permission {
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    public static final int REQUEST_EXTERNAL_STORAGE = 101;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     /**
@@ -27,7 +27,6 @@ public class Permission {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE);
-            Toast.makeText(activity, "无存储卡读写权限", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
