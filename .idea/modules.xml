@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RichText.iml" filepath="$PROJECT_DIR$/RichText.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rich/rich.iml" filepath="$PROJECT_DIR$/rich/rich.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OTMarkdownEditor.iml" filepath="$PROJECT_DIR$/OTMarkdownEditor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/markdown/markdown.iml" filepath="$PROJECT_DIR$/markdown/markdown.iml" />
       <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
     </modules>
   </component>

@@ -1,1 +1,1 @@
-include ':sample', ':rich'
+include ':sample', ':markdown'

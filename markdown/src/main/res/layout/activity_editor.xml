@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.jiushig.markdown.ui.EditorActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#0000"
+                    android:hint="标题"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ddd" />
+
+                <EditText
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#0000"
+                    android:gravity="top"
+                    android:hint="开始你的记录.."
+                    android:minHeight="100dp"
+                    android:padding="10dp"
+                    android:textColor="@color/colorText"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:id="@+id/expandable_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            app:el_duration="500"
+            app:el_expanded="false">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:orientation="horizontal"
+                    android:paddingEnd="10dp"
+                    android:paddingStart="10dp">
+
+                    <ImageView
+                        android:id="@+id/format_header_1"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_header_1_img" />
+
+                    <ImageView
+                        android:id="@+id/format_header_2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_header_2_img" />
+
+                    <ImageView
+                        android:id="@+id/format_header_3"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_header_3_img" />
+
+                    <ImageView
+                        android:id="@+id/format_header_4"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_header_4_img" />
+
+                    <ImageView
+                        android:id="@+id/format_header_5"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_header_5_img" />
+
+                    <ImageView
+                        android:id="@+id/format_bold"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_bold_img" />
+
+                    <ImageView
+                        android:id="@+id/format_italic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_italic_img" />
+
+                    <ImageView
+                        android:id="@+id/link"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/link_img" />
+
+                    <ImageView
+                        android:id="@+id/edit_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/edit_img" />
+
+                    <ImageView
+                        android:id="@+id/format_quote"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/format_quote_img" />
+
+                    <ImageView
+                        android:id="@+id/list"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:src="@mipmap/list_img" />
+
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </net.cachapa.expandablelayout.ExpandableLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
