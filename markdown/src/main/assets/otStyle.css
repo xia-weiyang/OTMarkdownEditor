@@ -1,0 +1,15 @@
+html {
+    width: 100%;
+    word-break: break-all;
+}
+
+img {
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+}
+blockquote {
+    background: #f4f4f4;
+    padding: 5px;
+}

@@ -66,8 +66,11 @@ public class MarkDownHandler {
     }
 
     private String disposeHtml(String htm) {
-        htm = htm.replaceAll("<img src", "<img style='width:100%' src");
-        return htm;
+        return "<html>" +
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/otStyle.css\" />" +
+                "<body>" +
+                htm +
+                "</body></html>";
     }
 
     public interface Callback {

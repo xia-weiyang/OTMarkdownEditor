@@ -2,6 +2,7 @@ package com.jiushig.markdown.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -61,6 +62,8 @@ public class RichView extends WebView {
 
         setHorizontalScrollBarEnabled(false);
         setVerticalScrollBarEnabled(false);
+
+        getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
     }
 
     public void setListener(LinkClickListener listener) {

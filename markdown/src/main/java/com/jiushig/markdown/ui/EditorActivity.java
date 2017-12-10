@@ -107,7 +107,7 @@ public class EditorActivity extends BaseActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 richHandler.onClick(findViewById(R.id.edit_img));
             } else {
-                Snackbar.make(findViewById(R.id.root), "获取SD卡读写权限失败", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(findViewById(R.id.root), R.string.sd_fail, Snackbar.LENGTH_LONG).show();
             }
         }
     }
