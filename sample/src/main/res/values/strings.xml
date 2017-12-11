@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">OTMarkdownEditor</string>
 
+    <string name="action_ot_preview">快速预览</string>
+    <string name="action_ot_edit">编辑</string>
+
 </resources>

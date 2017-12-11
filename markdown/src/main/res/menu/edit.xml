@@ -2,23 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_more"
-        android:title="@string/action_more"
+    <item
+        android:id="@+id/action_more"
         android:icon="@mipmap/ic_arrow_down"
-        app:showAsAction="always"/>
+        android:title="@string/action_ot_more"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/action_save"
-        android:title="@string/action_save"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_preview"
-        android:title="@string/action_preview"
+        android:title="@string/action_ot_save"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/action_reference"
-        android:title="@string/action_reference"
+        android:title="@string/action_ot_reference"
         app:showAsAction="never" />
 </menu>

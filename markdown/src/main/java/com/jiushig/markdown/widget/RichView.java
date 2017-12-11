@@ -37,7 +37,6 @@ public class RichView extends WebView {
 
     public void setTextInBackground(String text) {
         this.text = text;
-        loadDataWithBaseURL(null, "<p style='text-align:center'>加载中...</p><br/>", "text/html", "utf8mb4", null);
         MarkDownHandler.getInstance().toHtml(text, new MarkDownHandler.Callback() {
             @Override
             public void done(String html) {

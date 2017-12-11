@@ -45,6 +45,9 @@ public class MarkDownHandler {
     }
 
     public void toHtml(final String markdownText, final Callback callback) {
+        if (markdownText == null)
+            return;
+
         new Thread() {
             @Override
             public void run() {

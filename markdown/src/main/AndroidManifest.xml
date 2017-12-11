@@ -14,8 +14,6 @@
         <activity
             android:name="com.jiushig.markdown.ui.EditorActivity"
             android:label="@string/rich_name" />
-        <activity android:name="com.jiushig.markdown.ui.PreviewActivity"
-            android:label="@string/action_preview"/>
 
     </application>
 
