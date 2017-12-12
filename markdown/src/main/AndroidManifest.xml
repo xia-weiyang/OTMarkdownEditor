@@ -13,7 +13,8 @@
 
         <activity
             android:name="com.jiushig.markdown.ui.EditorActivity"
-            android:label="@string/rich_name" />
+            android:screenOrientation="portrait"
+            android:label="@string/markdown_name" />
 
     </application>
 

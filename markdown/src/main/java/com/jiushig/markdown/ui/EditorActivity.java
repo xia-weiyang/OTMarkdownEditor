@@ -1,6 +1,7 @@
 package com.jiushig.markdown.ui;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -34,6 +35,9 @@ public class EditorActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 保持竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         setContentView(R.layout.activity_editor);
         setToolBar();
         initViews();
@@ -105,9 +109,6 @@ public class EditorActivity extends BaseActivity {
         } else if (item.getItemId() == R.id.action_save) {
             if (editorFragment.editTitle != null && editorFragment.editText != null)
                 clickSave(editorFragment.editTitle.getText().toString(), editorFragment.editText.getText().toString());
-        } else if (item.getItemId() == R.id.action_more) {
-            if (editorFragment.expandableLayout != null)
-                editorFragment.expandableLayout.toggle();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -129,7 +130,7 @@ public class EditorActivity extends BaseActivity {
         if (requestCode == PermissionUtils.REQUEST_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (editorFragment.editorHandler != null)
-                editorFragment.editorHandler.onClick(findViewById(R.id.edit_img));
+                    editorFragment.editorHandler.onClick(findViewById(R.id.edit_img));
             } else {
                 Snackbar.make(findViewById(R.id.root), R.string.sd_fail, Snackbar.LENGTH_LONG).show();
             }

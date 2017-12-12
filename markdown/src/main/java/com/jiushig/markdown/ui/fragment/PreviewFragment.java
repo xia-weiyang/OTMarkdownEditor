@@ -58,8 +58,7 @@ public class PreviewFragment extends Fragment {
         });
     }
 
-    public void load(String text){
+    public void load(String text) {
         markdownView.setTextInBackground(text);
-//        richView.setText(text);
     }
 }

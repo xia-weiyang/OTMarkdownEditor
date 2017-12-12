@@ -1,10 +1,9 @@
 <resources>
-    <string name="rich_name">OTMarkdownEditor</string>
+    <string name="markdown_name">OTMarkdownEditor</string>
 
     <string name="action_ot_reference">语法参考?</string>
     <string name="action_ot_preview">预览</string>
     <string name="action_ot_edit">编辑</string>
-    <string name="action_ot_more">更多</string>
     <string name="action_ot_save">保存</string>
 
     <string name="edit_img">图片</string>
@@ -20,4 +19,7 @@
     <string name="list">无序列表</string>
 
     <string name="sd_fail">获取SD卡读写权限失败</string>
+
+    <string name="editTextTip">开始你的记录..</string>
+    <string name="editTitleTip">标题</string>
 </resources>

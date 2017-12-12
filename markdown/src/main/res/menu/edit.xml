@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_more"
-        android:icon="@mipmap/ic_arrow_down"
-        android:title="@string/action_ot_more"
-        app:showAsAction="always" />
-
-    <item
         android:id="@+id/action_save"
         android:title="@string/action_ot_save"
         app:showAsAction="never" />

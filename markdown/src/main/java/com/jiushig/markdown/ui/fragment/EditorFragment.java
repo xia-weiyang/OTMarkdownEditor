@@ -9,13 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.RelativeLayout;
 
 import com.jiushig.markdown.R;
 import com.jiushig.markdown.ui.EditorActivity;
 import com.jiushig.markdown.utils.EditorHandler;
-
-import net.cachapa.expandablelayout.ExpandableLayout;
 
 /**
  * Created by zk on 2017/12/11.
@@ -28,7 +27,7 @@ public class EditorFragment extends Fragment {
     public EditText editTitle;
     public EditText editText;
 
-    public ExpandableLayout expandableLayout;
+    public HorizontalScrollView horizontalScrollView;
 
     public EditorHandler editorHandler;
 
@@ -46,8 +45,6 @@ public class EditorFragment extends Fragment {
         if (main == null) {
             main = (RelativeLayout) inflater.inflate(R.layout.fragment_editor, container, false);
             initView(main);
-
-            getData();
         }
         return main;
     }
@@ -55,16 +52,10 @@ public class EditorFragment extends Fragment {
     private void initView(RelativeLayout main) {
         editTitle = (EditText) main.findViewById(R.id.title);
         editText = (EditText) main.findViewById(R.id.content);
-        expandableLayout = (ExpandableLayout) main.findViewById(R.id.expandable_layout);
+        horizontalScrollView = (HorizontalScrollView) main.findViewById(R.id.hScroll_layout);
 
-        editorHandler = new EditorHandler(activity, expandableLayout, editText);
+        editorHandler = new EditorHandler(activity, horizontalScrollView, editText);
     }
 
-    private void getData() {
-        String title = activity.getIntent().getStringExtra("title");
-        String text = activity.getIntent().getStringExtra("text");
-        this.editTitle.setText(title == null ? "" : title);
-        this.editText.setText(text == null ? "" : text);
-    }
 
 }
