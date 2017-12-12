@@ -10,11 +10,11 @@ import java.util.List;
  * Created by zk on 2017/12/11.
  */
 
-public class ViewPageAdapter extends FragmentPagerAdapter {
+public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
 
-    public ViewPageAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public ViewPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
     }

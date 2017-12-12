@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.jiushig.markdown.R;
 import com.jiushig.markdown.ui.EditorActivity;
-import com.jiushig.markdown.utils.RichHandler;
+import com.jiushig.markdown.utils.EditorHandler;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -30,7 +30,7 @@ public class EditorFragment extends Fragment {
 
     public ExpandableLayout expandableLayout;
 
-    public RichHandler richHandler;
+    public EditorHandler editorHandler;
 
     private EditorActivity activity;
 
@@ -57,7 +57,7 @@ public class EditorFragment extends Fragment {
         editText = (EditText) main.findViewById(R.id.content);
         expandableLayout = (ExpandableLayout) main.findViewById(R.id.expandable_layout);
 
-        richHandler = new RichHandler(activity, expandableLayout, editText);
+        editorHandler = new EditorHandler(activity, expandableLayout, editText);
     }
 
     private void getData() {

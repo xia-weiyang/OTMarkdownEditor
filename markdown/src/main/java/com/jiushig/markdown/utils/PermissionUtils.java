@@ -10,7 +10,7 @@ import android.support.v4.app.ActivityCompat;
  * 权限请求管理
  */
 
-public class Permission {
+public class PermissionUtils {
 
     public static final int REQUEST_EXTERNAL_STORAGE = 101;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};

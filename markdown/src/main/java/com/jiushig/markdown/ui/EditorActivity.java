@@ -13,10 +13,10 @@ import android.view.MenuItem;
 
 import com.jiushig.markdown.BaseActivity;
 import com.jiushig.markdown.R;
-import com.jiushig.markdown.ui.adapter.ViewPageAdapter;
+import com.jiushig.markdown.ui.adapter.ViewPagerAdapter;
 import com.jiushig.markdown.ui.fragment.EditorFragment;
 import com.jiushig.markdown.ui.fragment.PreviewFragment;
-import com.jiushig.markdown.utils.Permission;
+import com.jiushig.markdown.utils.PermissionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +46,7 @@ public class EditorActivity extends BaseActivity {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(editorFragment);
         fragments.add(previewFragment);
-        viewPager.setAdapter(new ViewPageAdapter(getSupportFragmentManager(), fragments));
+        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), fragments));
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -60,9 +60,11 @@ public class EditorActivity extends BaseActivity {
                     toolbar.setTitle(R.string.action_ot_edit);
                 }
                 if (position == 1) {
-                    previewFragment.load(editorFragment.editText.getText().toString());
-                    toolbar.setTitle(R.string.action_ot_preview);
-                    closeKeyboard(editorFragment.editText, EditorActivity.this);
+                    if (editorFragment.editText != null) {
+                        previewFragment.load(editorFragment.editText.getText().toString());
+                        toolbar.setTitle(R.string.action_ot_preview);
+                        closeKeyboard(editorFragment.editText, EditorActivity.this);
+                    }
                 }
             }
 
@@ -101,9 +103,11 @@ public class EditorActivity extends BaseActivity {
         } else if (item.getItemId() == R.id.action_reference) {
             clickReference();
         } else if (item.getItemId() == R.id.action_save) {
-            clickSave(editorFragment.editTitle.getText().toString(), editorFragment.editText.getText().toString());
+            if (editorFragment.editTitle != null && editorFragment.editText != null)
+                clickSave(editorFragment.editTitle.getText().toString(), editorFragment.editText.getText().toString());
         } else if (item.getItemId() == R.id.action_more) {
-            editorFragment.expandableLayout.toggle();
+            if (editorFragment.expandableLayout != null)
+                editorFragment.expandableLayout.toggle();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -113,7 +117,8 @@ public class EditorActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_IMG) {
-                editorFragment.richHandler.addImg(data.getData());
+                if (editorFragment.editorHandler != null)
+                    editorFragment.editorHandler.addImg(data.getData());
             }
         }
     }
@@ -121,9 +126,10 @@ public class EditorActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == Permission.REQUEST_EXTERNAL_STORAGE) {
+        if (requestCode == PermissionUtils.REQUEST_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                editorFragment.richHandler.onClick(findViewById(R.id.edit_img));
+                if (editorFragment.editorHandler != null)
+                editorFragment.editorHandler.onClick(findViewById(R.id.edit_img));
             } else {
                 Snackbar.make(findViewById(R.id.root), R.string.sd_fail, Snackbar.LENGTH_LONG).show();
             }

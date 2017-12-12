@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.jiushig.markdown.widget.RichView
+    <com.jiushig.markdown.widget.MarkdownView
         android:id="@+id/richView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

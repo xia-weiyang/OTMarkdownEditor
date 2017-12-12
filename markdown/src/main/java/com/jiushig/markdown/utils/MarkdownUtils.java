@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * Created by zk on 2017/10/1.
  */
 
-public class RichUtils {
+public class MarkdownUtils {
 
     /**
      * 获取真实文件路径

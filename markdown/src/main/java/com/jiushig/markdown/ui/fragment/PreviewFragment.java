@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 import com.jiushig.markdown.R;
 import com.jiushig.markdown.ui.EditorActivity;
-import com.jiushig.markdown.widget.RichView;
+import com.jiushig.markdown.widget.MarkdownView;
 
 /**
  * Created by zk on 2017/12/11.
@@ -23,7 +23,7 @@ public class PreviewFragment extends Fragment {
 
     private LinearLayout main;
 
-    protected RichView richView;
+    protected MarkdownView markdownView;
 
     private EditorActivity activity;
 
@@ -44,9 +44,9 @@ public class PreviewFragment extends Fragment {
     }
 
     private void initViews(LinearLayout main) {
-        richView = (RichView) main.findViewById(R.id.richView);
+        markdownView = (MarkdownView) main.findViewById(R.id.richView);
 
-        richView.setListener(new RichView.LinkClickListener() {
+        markdownView.setListener(new MarkdownView.LinkClickListener() {
             @Override
             public void click(String url) {
                 Intent intent = new Intent();
@@ -59,7 +59,7 @@ public class PreviewFragment extends Fragment {
     }
 
     public void load(String text){
-        richView.setTextInBackground(text);
+        markdownView.setTextInBackground(text);
 //        richView.setText(text);
     }
 }

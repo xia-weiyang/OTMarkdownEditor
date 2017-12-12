@@ -15,14 +15,14 @@ import com.jiushig.markdown.ui.EditorActivity;
  * Created by zk on 2017/9/9.
  */
 
-public class RichHandler implements View.OnClickListener, View.OnLongClickListener {
+public class EditorHandler implements View.OnClickListener, View.OnLongClickListener {
 
     private Activity activity;
 
     private EditText editText;
     private View view;
 
-    public RichHandler(Activity activity, View view, EditText editText) {
+    public EditorHandler(Activity activity, View view, EditText editText) {
         this.editText = editText;
         this.view = view;
         this.activity = activity;
@@ -58,7 +58,7 @@ public class RichHandler implements View.OnClickListener, View.OnLongClickListen
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.edit_img) {
-            if (!Permission.storage(activity)) return;
+            if (!PermissionUtils.storage(activity)) return;
 
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
@@ -115,7 +115,7 @@ public class RichHandler implements View.OnClickListener, View.OnLongClickListen
     }
 
     public void addImg(Uri uri) {
-        String path = RichUtils.getRealFilePath(activity, uri);
+        String path = MarkdownUtils.getRealFilePath(activity, uri);
         if (path == null) {
             Toast.makeText(activity, "获取图片失败", Toast.LENGTH_LONG).show();
         } else {

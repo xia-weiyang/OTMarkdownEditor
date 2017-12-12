@@ -6,38 +6,38 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.jiushig.markdown.utils.MarkDownHandler;
+import com.jiushig.markdown.utils.MarkdownHandler;
 
 /**
  * Created by zk on 2017/9/14.
  */
 
-public class RichView extends WebView {
+public class MarkdownView extends WebView {
 
-    private static final String TAG = RichView.class.getSimpleName();
+    private static final String TAG = MarkdownView.class.getSimpleName();
 
     private String text;
 
     private LinkClickListener listener;
 
-    public RichView(Context context) {
+    public MarkdownView(Context context) {
         super(context);
         addClient();
     }
 
-    public RichView(Context context, AttributeSet attrs) {
+    public MarkdownView(Context context, AttributeSet attrs) {
         super(context, attrs);
         addClient();
     }
 
-    public RichView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MarkdownView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         addClient();
     }
 
     public void setTextInBackground(String text) {
         this.text = text;
-        MarkDownHandler.getInstance().toHtml(text, new MarkDownHandler.Callback() {
+        MarkdownHandler.getInstance().toHtml(text, new MarkdownHandler.Callback() {
             @Override
             public void done(String html) {
                 if (html != null) {
@@ -49,7 +49,7 @@ public class RichView extends WebView {
 
     public void setText(String text){
         this.text = text;
-        loadDataWithBaseURL(null, MarkDownHandler.getInstance().toHtml(text), "text/html", "utf8mb4", null);
+        loadDataWithBaseURL(null, MarkdownHandler.getInstance().toHtml(text), "text/html", "utf8mb4", null);
     }
 
     public String getText() {

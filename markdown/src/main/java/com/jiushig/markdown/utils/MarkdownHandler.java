@@ -14,22 +14,22 @@ import com.vladsch.flexmark.util.options.MutableDataSet;
  * Created by zk on 2017/9/13.
  */
 
-public class MarkDownHandler {
+public class MarkdownHandler {
 
-    private static final String TAG = MarkDownHandler.class.getSimpleName();
+    private static final String TAG = MarkdownHandler.class.getSimpleName();
 
     private Parser parser;
     private HtmlRenderer renderer;
 
-    private static MarkDownHandler instance;
+    private static MarkdownHandler instance;
 
-    public static MarkDownHandler getInstance() {
+    public static MarkdownHandler getInstance() {
         if (instance == null)
-            instance = new MarkDownHandler();
+            instance = new MarkdownHandler();
         return instance;
     }
 
-    private MarkDownHandler() {
+    private MarkdownHandler() {
         MutableDataSet options = new MutableDataSet();
         parser = Parser.builder(options).build();
         renderer = HtmlRenderer.builder(options).build();
