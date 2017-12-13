@@ -12,4 +12,14 @@ public class MainActivity extends EditorActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    protected void clickReference() {
+        super.clickReference();
+    }
+
+    @Override
+    protected void clickSave(String title, String text) {
+        super.clickSave(title, text);
+    }
 }

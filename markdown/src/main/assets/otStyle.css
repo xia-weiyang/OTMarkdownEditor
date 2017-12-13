@@ -1,6 +1,7 @@
 html {
     width: 100%;
     word-break: break-all;
+    text-align: justify;
 }
 
 img {
@@ -10,6 +11,7 @@ img {
     margin-bottom: 0.5%;
 }
 blockquote {
-    background: #f4f4f4;
+    background: #f8f8f8;
     padding: 5px;
 }
+

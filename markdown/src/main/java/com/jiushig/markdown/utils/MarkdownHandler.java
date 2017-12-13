@@ -10,6 +10,11 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by zk on 2017/9/13.
  */
@@ -37,6 +42,7 @@ public class MarkdownHandler {
     }
 
     public String toHtml(String markdownText) {
+        Log.d(TAG, markdownText);
         Node document = parser.parse(markdownText);
         String htm = renderer.render(document);
         htm = disposeHtml(htm);
@@ -51,11 +57,7 @@ public class MarkdownHandler {
         new Thread() {
             @Override
             public void run() {
-                Node document = parser.parse(markdownText);
-                String htm = renderer.render(document);
-                htm = disposeHtml(htm);
-                final String html = htm;
-                Log.d(TAG, htm);
+                final String html = toHtml(markdownText);
                 if (callback != null) {
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         @Override
@@ -72,8 +74,42 @@ public class MarkdownHandler {
         return "<html>" +
                 "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/otStyle.css\" />" +
                 "<body>" +
-                htm +
+                disposeP(htm) +
                 "</body></html>";
+    }
+
+    /**
+     * 处理P标签内部换行问题
+     *
+     * @param htm
+     * @return
+     */
+    private String disposeP(String htm) {
+        Pattern pattern = Pattern.compile("<p>[\\s\\S]*?</p>");
+        Matcher matcher = pattern.matcher(htm);
+        List<Integer> integers = new ArrayList<>();
+        integers.add(0);
+        while (matcher.find()) {
+            integers.add(matcher.start());
+            integers.add(matcher.end());
+//            Log.d(TAG, matcher.group());
+        }
+        integers.add(htm.length());
+
+        List<String> list = new ArrayList<>();
+        for (int i = 1; i < integers.size(); i++) {
+            list.add(htm.substring(integers.get(i - 1), integers.get(i)));
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (String string : list) {
+            if (string.startsWith("<p>")) {
+                sb.append(string.replaceAll("\\n", "<br>"));
+            } else {
+                sb.append(string);
+            }
+        }
+        return sb.toString();
     }
 
     public interface Callback {
