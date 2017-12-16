@@ -129,8 +129,7 @@ public class EditorActivity extends BaseActivity {
         } else if (item.getItemId() == R.id.action_reference) {
             clickReference();
         } else if (item.getItemId() == R.id.action_save) {
-            if (editorFragment.editTitle != null && editorFragment.editText != null)
-                clickSave(editorFragment.editTitle.getText().toString(), editorFragment.editText.getText().toString());
+            clickSave(getMarkdownTitle(), getMarkdownText());
         } else if (item.getItemId() == R.id.action_preview) {
             viewPager.setCurrentItem(1);
         }
@@ -168,6 +167,48 @@ public class EditorActivity extends BaseActivity {
             return;
         }
         super.onBackPressed();
+    }
+
+    /**
+     * 获得标题
+     *
+     * @return
+     */
+    public String getMarkdownTitle() {
+        if (editorFragment.editTitle != null)
+            return editorFragment.editTitle.getText().toString();
+        return "";
+    }
+
+    /**
+     * 获得文本
+     *
+     * @return
+     */
+    public String getMarkdownText() {
+        if (editorFragment.editText != null)
+            return editorFragment.editText.getText().toString();
+        return "";
+    }
+
+    /**
+     * 设置标题
+     *
+     * @return
+     */
+    public void setMarkdownTitle(String title) {
+        if (editorFragment.editTitle != null && title != null)
+            editorFragment.editTitle.setText(title);
+    }
+
+    /**
+     * 设置文本
+     *
+     * @return
+     */
+    public void setMarkdownText(String text) {
+        if (editorFragment.editText != null && text != null)
+            editorFragment.editText.setText(text);
     }
 
     /**
