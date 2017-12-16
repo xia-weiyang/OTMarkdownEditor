@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -73,7 +74,7 @@ public class EditorActivity extends BaseActivity {
                     if (editorFragment.editText != null) {
                         previewFragment.load(editorFragment.editText.getText().toString());
                         toolbar.setTitle(R.string.action_ot_preview);
-                        closeKeyboard(editorFragment.editText, EditorActivity.this);
+                        closeKeyboard();
 
                         if (menu != null)
                             menu.findItem(R.id.action_preview).setVisible(false);
@@ -161,12 +162,21 @@ public class EditorActivity extends BaseActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 1) {
-            viewPager.setCurrentItem(0);
-            return;
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            if (viewPager.getCurrentItem() == 1) {
+                viewPager.setCurrentItem(0);
+                return false;
+            }
         }
-        super.onBackPressed();
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 关闭键盘的方法
+     */
+    public void closeKeyboard() {
+        closeKeyboard(editorFragment.editText, this);
     }
 
     /**
