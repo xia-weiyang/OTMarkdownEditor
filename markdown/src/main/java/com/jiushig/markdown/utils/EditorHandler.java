@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.jiushig.markdown.R;
 import com.jiushig.markdown.ui.EditorActivity;
 
+import ren.qinc.edit.PerformEdit;
+
 
 /**
  * Created by zk on 2017/9/9.
@@ -22,10 +24,15 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
     private EditText editText;
     private View view;
 
+    private PerformEdit performEdit;
+
     public EditorHandler(Activity activity, View view, EditText editText) {
         this.editText = editText;
         this.view = view;
         this.activity = activity;
+
+        performEdit = new PerformEdit(editText);
+        performEdit.setDefaultText(editText.getText());
 
         initView();
     }
@@ -53,6 +60,10 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
         view.findViewById(R.id.link).setOnLongClickListener(this);
         view.findViewById(R.id.list).setOnClickListener(this);
         view.findViewById(R.id.list).setOnLongClickListener(this);
+        view.findViewById(R.id.undo).setOnClickListener(this);
+        view.findViewById(R.id.undo).setOnLongClickListener(this);
+        view.findViewById(R.id.redo).setOnClickListener(this);
+        view.findViewById(R.id.redo).setOnLongClickListener(this);
     }
 
     @Override
@@ -83,6 +94,10 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
             addLink();
         } else if (v.getId() == R.id.list) {
             addList();
+        }else if (v.getId() == R.id.undo) {
+            performEdit.undo();
+        }else if (v.getId() == R.id.redo) {
+            performEdit.redo();
         }
     }
 
@@ -110,6 +125,10 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
             Toast.makeText(activity, R.string.link, Toast.LENGTH_LONG).show();
         } else if (v.getId() == R.id.list) {
             Toast.makeText(activity, R.string.list, Toast.LENGTH_LONG).show();
+        }else if(v.getId() == R.id.undo){
+            Toast.makeText(activity, R.string.undo, Toast.LENGTH_LONG).show();
+        }else if(v.getId() == R.id.redo){
+            Toast.makeText(activity, R.string.redo, Toast.LENGTH_LONG).show();
         }
         return false;
     }
@@ -166,4 +185,5 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
     public void addList() {
         editText.getText().insert(editText.getSelectionStart(), "\n-");
     }
+
 }

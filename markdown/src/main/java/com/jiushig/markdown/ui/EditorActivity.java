@@ -1,5 +1,6 @@
 package com.jiushig.markdown.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -31,6 +33,8 @@ public class EditorActivity extends BaseActivity {
     private PreviewFragment previewFragment = new PreviewFragment();
 
     public final static int REQUEST_CODE_IMG = 4000;
+
+    private Menu menu;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,12 +66,29 @@ public class EditorActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 if (position == 0) {
                     toolbar.setTitle(R.string.action_ot_edit);
+                    if (menu != null)
+                        menu.findItem(R.id.action_preview).setVisible(true);
                 }
                 if (position == 1) {
                     if (editorFragment.editText != null) {
                         previewFragment.load(editorFragment.editText.getText().toString());
                         toolbar.setTitle(R.string.action_ot_preview);
                         closeKeyboard(editorFragment.editText, EditorActivity.this);
+
+                        if (menu != null)
+                            menu.findItem(R.id.action_preview).setVisible(false);
+
+                        if (preferences.getBoolean("tip_preview", true)) {
+                            new AlertDialog.Builder(EditorActivity.this)
+                                    .setTitle(R.string.ot_tip)
+                                    .setMessage(R.string.ot_tip_preview)
+                                    .setPositiveButton(R.string.ot_tip_i_know, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            preferences.edit().putBoolean("tip_preview", false).apply();
+                                        }
+                                    }).show();
+                        }
                     }
                 }
             }
@@ -97,6 +118,7 @@ public class EditorActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.edit, menu);
+        this.menu = menu;
         return true;
     }
 
@@ -109,6 +131,8 @@ public class EditorActivity extends BaseActivity {
         } else if (item.getItemId() == R.id.action_save) {
             if (editorFragment.editTitle != null && editorFragment.editText != null)
                 clickSave(editorFragment.editTitle.getText().toString(), editorFragment.editText.getText().toString());
+        } else if (item.getItemId() == R.id.action_preview) {
+            viewPager.setCurrentItem(1);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -135,6 +159,15 @@ public class EditorActivity extends BaseActivity {
                 Snackbar.make(findViewById(R.id.root), R.string.sd_fail, Snackbar.LENGTH_LONG).show();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (viewPager.getCurrentItem() == 1) {
+            viewPager.setCurrentItem(0);
+            return;
+        }
+        super.onBackPressed();
     }
 
     /**

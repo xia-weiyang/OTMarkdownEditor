@@ -8,6 +8,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_preview"
+        android:title="@string/action_ot_preview"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_reference"
         android:title="@string/action_ot_reference"
         app:showAsAction="never" />

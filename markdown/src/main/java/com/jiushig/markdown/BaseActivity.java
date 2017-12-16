@@ -1,6 +1,7 @@
 package com.jiushig.markdown;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +18,12 @@ public class BaseActivity extends AppCompatActivity {
 
     protected Toolbar toolbar;
 
+    protected SharedPreferences preferences;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preferences = getSharedPreferences("OTMarkdownEditor",MODE_PRIVATE);
     }
 
     /**

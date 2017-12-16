@@ -15,6 +15,8 @@
     <string name="format_header_4">四级标题</string>
     <string name="format_header_5">五级标题</string>
     <string name="format_quote">文字引用</string>
+    <string name="undo">撤销</string>
+    <string name="redo">前进</string>
     <string name="link">链接</string>
     <string name="list">无序列表</string>
 
@@ -22,4 +24,8 @@
 
     <string name="editTextTip">开始你的记录..</string>
     <string name="editTitleTip">标题</string>
+
+    <string name="ot_tip">提示</string>
+    <string name="ot_tip_preview">左滑可以快速返回到编辑界面。</string>
+    <string name="ot_tip_i_know">我知道了</string>
 </resources>

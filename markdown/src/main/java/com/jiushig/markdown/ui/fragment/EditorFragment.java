@@ -54,7 +54,17 @@ public class EditorFragment extends Fragment {
         editText = (EditText) main.findViewById(R.id.content);
         horizontalScrollView = (HorizontalScrollView) main.findViewById(R.id.hScroll_layout);
 
+        getData();
+
         editorHandler = new EditorHandler(activity, horizontalScrollView, editText);
+    }
+
+
+    private void getData() {
+        String title = activity.getIntent().getStringExtra("title");
+        String text = activity.getIntent().getStringExtra("text");
+        editTitle.setText(title == null ? "" : title);
+        editText.setText(text == null ? "" : text);
     }
 
 
