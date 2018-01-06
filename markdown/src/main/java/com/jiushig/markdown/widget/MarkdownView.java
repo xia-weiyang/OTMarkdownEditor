@@ -2,11 +2,15 @@ package com.jiushig.markdown.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.jiushig.markdown.utils.Log;
 import com.jiushig.markdown.utils.MarkdownHandler;
+
+import java.util.List;
 
 /**
  * Created by zk on 2017/9/14.
@@ -17,8 +21,10 @@ public class MarkdownView extends WebView {
     private static final String TAG = MarkdownView.class.getSimpleName();
 
     private String text;
+    private List<String> imgList;
 
-    private LinkClickListener listener;
+    private LinkClickListener linkClickListener;
+    private ImgClickListener imgClickListener;
 
     public MarkdownView(Context context) {
         super(context);
@@ -37,6 +43,7 @@ public class MarkdownView extends WebView {
 
     public void setTextInBackground(String text) {
         this.text = text;
+        imgList = MarkdownHandler.getInstance().getImgUrls(text);
         MarkdownHandler.getInstance().toHtml(text, new MarkdownHandler.Callback() {
             @Override
             public void done(String html) {
@@ -47,8 +54,15 @@ public class MarkdownView extends WebView {
         });
     }
 
-    public void setText(String text){
+    /**
+     * 使用此方法会导致界面卡顿
+     *
+     * @param text
+     */
+    @Deprecated
+    public void setText(String text) {
         this.text = text;
+        imgList = MarkdownHandler.getInstance().getImgUrls(text);
         loadDataWithBaseURL(null, MarkdownHandler.getInstance().toHtml(text), "text/html", "utf8mb4", null);
     }
 
@@ -63,23 +77,48 @@ public class MarkdownView extends WebView {
         setVerticalScrollBarEnabled(false);
 
         getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        getSettings().setJavaScriptEnabled(true);
+        addJavascriptInterface(new AndroidBridge(), "android");
     }
 
-    public void setListener(LinkClickListener listener) {
-        this.listener = listener;
+    public void setLinkClickListener(LinkClickListener listener) {
+        this.linkClickListener = listener;
+    }
+
+    public void setImgClickListener(ImgClickListener listener) {
+        this.imgClickListener = listener;
     }
 
     private final class MyWebClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (listener != null) {
-                listener.click(url);
+            if (linkClickListener != null) {
+                linkClickListener.click(url);
             }
             return true;
         }
     }
 
+    private class AndroidBridge {
+        @JavascriptInterface
+        public void callAndroidImg(String arg) {
+            Log.d(TAG, arg);
+            int index = Integer.parseInt(arg);
+            if (index >= 0 && index < imgList.size()) {
+                if (imgClickListener != null) {
+                    String[] strs = new String[imgList.size()];
+                    strs = imgList.toArray(strs);
+                    imgClickListener.click(strs, index);
+                }
+            }
+        }
+    }
+
     public interface LinkClickListener {
         void click(String url);
+    }
+
+    public interface ImgClickListener {
+        void click(String[] urls, int index);
     }
 }

@@ -4,12 +4,12 @@ group='com.github.xia-weiyang'
 
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 13
         versionName "1.0"
 
@@ -29,8 +29,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    compile 'com.android.support:design:25.4.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     compile 'ren.qinc.edit:lib:0.0.5'
     compile 'com.vladsch.flexmark:flexmark-formatter:0.27.0'
 

@@ -40,11 +40,37 @@ public class MarkdownHandler {
 
     }
 
+    /**
+     * 匹配图片
+     *
+     * @param markdownText
+     * @return
+     */
+    public List<String> getImgUrls(String markdownText) {
+        ArrayList<String> list = new ArrayList<>();
+        Pattern pattern = Pattern.compile("!\\[.*?\\]\\(.+?\\)");
+        Matcher matcher = pattern.matcher(markdownText);
+
+        while (matcher.find()) {
+            Matcher ms = Pattern.compile("\\(.+\\)").matcher(matcher.group());
+            while (ms.find()) {
+                String str = ms.group();
+                if (str.startsWith("("))
+                    str = str.substring(1, str.length());
+                if (str.endsWith(")"))
+                    str = str.substring(0, str.length() - 1);
+                list.add(str);
+            }
+        }
+        return list;
+    }
+
     public String toHtml(String markdownText) {
         Log.d(TAG, markdownText);
         Node document = parser.parse(markdownText);
         String htm = renderer.render(document);
         htm = disposeHtml(htm);
+        htm = disposeImgClick(htm);
         Log.d(TAG, htm);
         return htm;
     }
@@ -104,6 +130,36 @@ public class MarkdownHandler {
         for (String string : list) {
             if (string.startsWith("<p>")) {
                 sb.append(string.replaceAll("\\n", "<br>"));
+            } else {
+                sb.append(string);
+            }
+        }
+        return sb.toString();
+    }
+
+    private String disposeImgClick(String htm) {
+        Pattern pattern = Pattern.compile("<img[\\s\\S]*?/>");
+        Matcher matcher = pattern.matcher(htm);
+        List<Integer> integers = new ArrayList<>();
+        integers.add(0);
+        while (matcher.find()) {
+            integers.add(matcher.start());
+            integers.add(matcher.end());
+//            Log.d(TAG, matcher.group());
+        }
+        integers.add(htm.length());
+
+        List<String> list = new ArrayList<>();
+        for (int i = 1; i < integers.size(); i++) {
+            list.add(htm.substring(integers.get(i - 1), integers.get(i)));
+        }
+
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        for (String string : list) {
+            if (string.startsWith("<img")) {
+                sb.append(string.replaceAll("img src",
+                        "img onclick=\"window.android.callAndroidImg(" + (i++) + ")\" src"));
             } else {
                 sb.append(string);
             }

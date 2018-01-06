@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.jiushig.markdown.R;
 import com.jiushig.markdown.ui.EditorActivity;
+import com.jiushig.markdown.utils.Log;
 import com.jiushig.markdown.widget.MarkdownView;
 
 /**
@@ -26,6 +27,8 @@ public class PreviewFragment extends Fragment {
     protected MarkdownView markdownView;
 
     private EditorActivity activity;
+
+    private static final String TAG = PreviewFragment.class.getSimpleName();
 
     @Override
     public void onAttach(Context context) {
@@ -46,7 +49,7 @@ public class PreviewFragment extends Fragment {
     private void initViews(LinearLayout main) {
         markdownView = (MarkdownView) main.findViewById(R.id.richView);
 
-        markdownView.setListener(new MarkdownView.LinkClickListener() {
+        markdownView.setLinkClickListener(new MarkdownView.LinkClickListener() {
             @Override
             public void click(String url) {
                 Intent intent = new Intent();
@@ -54,6 +57,13 @@ public class PreviewFragment extends Fragment {
                 Uri content_url = Uri.parse(url);
                 intent.setData(content_url);
                 startActivity(intent);
+            }
+        });
+
+        markdownView.setImgClickListener(new MarkdownView.ImgClickListener() {
+            @Override
+            public void click(String[] urls, int index) {
+                Log.d(TAG, urls[index]);
             }
         });
     }
