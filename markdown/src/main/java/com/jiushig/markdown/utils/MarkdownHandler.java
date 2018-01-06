@@ -3,7 +3,6 @@ package com.jiushig.markdown.utils;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
