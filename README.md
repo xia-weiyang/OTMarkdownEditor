@@ -25,13 +25,13 @@ allprojects {
 Add the dependency
 ```gradle
 dependencies {
-        compile 'com.github.xia-weiyang:OTMarkdownEditor:1.1.beta'
+        compile 'com.github.xia-weiyang:OTMarkdownEditor:1.1.beta3'
 }
 ```
 
 ## Usage
 
-#### 解析Markdown
+#### Markdown 解析
 
 ```xml
 <com.jiushig.markdown.widget.MarkdownView
@@ -42,12 +42,28 @@ dependencies {
 
 ```java
 MarkdownView markdownView = (MarkdownView) findViewById(R.id.markdownView);
-markdownView.setText(markdownString);
-// or 异步解析
 markdownView.setTextInBackground(markdownString);
 ```
 
-#### Markdown编辑器
+链接点击
+```java
+markdownView.setLinkClickListener(new MarkdownView.LinkClickListener() {
+    @Override
+    public void click(String url) {
+    }
+});
+```
+
+图片点击
+```java
+markdownView.setImgClickListener(new MarkdownView.ImgClickListener() {
+    @Override
+    public void click(String[] urls, int index) {
+    }
+});
+```
+
+#### Markdown 编辑器
 
 继承EditorActivity实现编辑器功能
 
@@ -59,11 +75,9 @@ public class MainActivity extends EditorActivity {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    protected void clickReference() {
-        super.clickReference();
-    }
-
+    /**
+    * 点击了保存
+    */
     @Override
     protected void clickSave(String title, String text) {
         super.clickSave(title, text);
@@ -73,7 +87,12 @@ public class MainActivity extends EditorActivity {
 
 Look at the sample app or markdown for more.
 
-# License
+### Thanks
+- [https://github.com/vsch/flexmark-java](https://github.com/vsch/flexmark-java)
+- [https://github.com/qinci/AndroidEdit](https://github.com/qinci/AndroidEdit)
+- [https://github.com/jasonm23/markdown-css-themes](https://github.com/jasonm23/markdown-css-themes)
+
+### License
 
 ```
 Copyright (C) 2017 xia-weiyang
