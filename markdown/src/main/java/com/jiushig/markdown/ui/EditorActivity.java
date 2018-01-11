@@ -21,6 +21,7 @@ import com.jiushig.markdown.ui.adapter.ViewPagerAdapter;
 import com.jiushig.markdown.ui.fragment.EditorFragment;
 import com.jiushig.markdown.ui.fragment.PreviewFragment;
 import com.jiushig.markdown.utils.PermissionUtils;
+import com.jiushig.markdown.widget.MarkdownView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -199,6 +200,10 @@ public class EditorActivity extends BaseActivity {
         if (editorFragment.editText != null)
             return editorFragment.editText.getText().toString();
         return "";
+    }
+
+    public MarkdownView getMarkdownView() {
+        return previewFragment.markdownView;
     }
 
     /**

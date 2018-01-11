@@ -24,7 +24,7 @@ public class PreviewFragment extends Fragment {
 
     private LinearLayout main;
 
-    protected MarkdownView markdownView;
+    public MarkdownView markdownView;
 
     private EditorActivity activity;
 
@@ -47,7 +47,7 @@ public class PreviewFragment extends Fragment {
     }
 
     private void initViews(LinearLayout main) {
-        markdownView = (MarkdownView) main.findViewById(R.id.richView);
+        markdownView = (MarkdownView) main.findViewById(R.id.markdownView);
 
         markdownView.setLinkClickListener(new MarkdownView.LinkClickListener() {
             @Override

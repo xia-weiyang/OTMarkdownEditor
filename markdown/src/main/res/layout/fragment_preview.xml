@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <com.jiushig.markdown.widget.MarkdownView
-        android:id="@+id/richView"
+        android:id="@+id/markdownView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
