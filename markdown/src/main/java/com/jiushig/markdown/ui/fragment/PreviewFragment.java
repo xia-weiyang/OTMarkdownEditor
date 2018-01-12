@@ -49,23 +49,8 @@ public class PreviewFragment extends Fragment {
     private void initViews(LinearLayout main) {
         markdownView = (MarkdownView) main.findViewById(R.id.markdownView);
 
-        markdownView.setLinkClickListener(new MarkdownView.LinkClickListener() {
-            @Override
-            public void click(String url) {
-                Intent intent = new Intent();
-                intent.setAction("android.intent.action.VIEW");
-                Uri content_url = Uri.parse(url);
-                intent.setData(content_url);
-                startActivity(intent);
-            }
-        });
-
-        markdownView.setImgClickListener(new MarkdownView.ImgClickListener() {
-            @Override
-            public void click(String[] urls, int index) {
-                Log.d(TAG, urls[index]);
-            }
-        });
+        markdownView.setLinkClickListener(activity.getLinkClickListener());
+        markdownView.setImgClickListener(activity.getImgClickListener());
     }
 
     public void load(String text) {

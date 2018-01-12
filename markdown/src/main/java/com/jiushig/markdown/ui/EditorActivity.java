@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import com.jiushig.markdown.R;
 import com.jiushig.markdown.ui.adapter.ViewPagerAdapter;
 import com.jiushig.markdown.ui.fragment.EditorFragment;
 import com.jiushig.markdown.ui.fragment.PreviewFragment;
+import com.jiushig.markdown.utils.Log;
 import com.jiushig.markdown.utils.PermissionUtils;
 import com.jiushig.markdown.widget.MarkdownView;
 
@@ -29,6 +31,8 @@ import java.util.List;
 
 public class EditorActivity extends BaseActivity {
 
+    private static final String TAG = EditorActivity.class.getSimpleName();
+
     protected ViewPager viewPager;
 
     private EditorFragment editorFragment = new EditorFragment();
@@ -37,6 +41,23 @@ public class EditorActivity extends BaseActivity {
     public final static int REQUEST_CODE_IMG = 4000;
 
     private Menu menu;
+
+    private MarkdownView.LinkClickListener linkClickListener = new MarkdownView.LinkClickListener() {
+        @Override
+        public void click(String url) {
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            Uri content_url = Uri.parse(url);
+            intent.setData(content_url);
+            startActivity(intent);
+        }
+    };
+    private MarkdownView.ImgClickListener imgClickListener = new MarkdownView.ImgClickListener() {
+        @Override
+        public void click(String[] urls, int index) {
+            Log.d(TAG, urls[index]);
+        }
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -173,6 +194,23 @@ public class EditorActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+
+    public void setLinkClickListener(MarkdownView.LinkClickListener linkClickListener) {
+        this.linkClickListener = linkClickListener;
+    }
+
+    public MarkdownView.LinkClickListener getLinkClickListener() {
+        return linkClickListener;
+    }
+
+    public MarkdownView.ImgClickListener getImgClickListener() {
+        return imgClickListener;
+    }
+
+    public void setImgClickListener(MarkdownView.ImgClickListener imgClickListener) {
+        this.imgClickListener = imgClickListener;
+    }
+
     /**
      * 关闭键盘的方法
      */
@@ -242,5 +280,4 @@ public class EditorActivity extends BaseActivity {
     protected void clickSave(String title, String text) {
 
     }
-
 }
