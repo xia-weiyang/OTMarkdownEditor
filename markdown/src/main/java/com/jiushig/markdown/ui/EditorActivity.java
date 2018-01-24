@@ -91,6 +91,8 @@ public class EditorActivity extends BaseActivity {
                     toolbar.setTitle(R.string.action_ot_edit);
                     if (menu != null)
                         menu.findItem(R.id.action_preview).setVisible(true);
+
+                    showKeyboard();
                 }
                 if (position == 1) {
                     if (editorFragment.editText != null) {
@@ -216,6 +218,13 @@ public class EditorActivity extends BaseActivity {
      */
     public void closeKeyboard() {
         closeKeyboard(editorFragment.editText, this);
+    }
+
+    /**
+     * 打开软键盘
+     */
+    public void showKeyboard(){
+        showKeyboard(editorFragment.editText);
     }
 
     /**

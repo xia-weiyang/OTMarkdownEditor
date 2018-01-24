@@ -23,7 +23,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferences = getSharedPreferences("OTMarkdownEditor",MODE_PRIVATE);
+        preferences = getSharedPreferences("OTMarkdownEditor", MODE_PRIVATE);
     }
 
     /**
@@ -44,6 +44,19 @@ public class BaseActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null)
             imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
+    }
+
+
+    /**
+     * 打开软键盘
+     *
+     * @param mEditText
+     */
+    public boolean showKeyboard(EditText mEditText) {
+        if (mEditText == null) return false;
+        mEditText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        return imm.showSoftInput(mEditText, InputMethodManager.RESULT_UNCHANGED_SHOWN);
     }
 
 }

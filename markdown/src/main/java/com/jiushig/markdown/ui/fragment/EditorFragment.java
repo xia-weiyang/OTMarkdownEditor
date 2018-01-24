@@ -56,7 +56,10 @@ public class EditorFragment extends Fragment {
 
         getData();
 
+        editText.requestFocus();
+
         editorHandler = new EditorHandler(activity, horizontalScrollView, editText);
+
     }
 
 

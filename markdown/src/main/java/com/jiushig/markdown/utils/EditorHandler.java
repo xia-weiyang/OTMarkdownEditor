@@ -68,6 +68,8 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
 
     @Override
     public void onClick(View v) {
+        editText.requestFocus();
+
         if (v.getId() == R.id.edit_img) {
             if (!PermissionUtils.storage(activity)) return;
 
