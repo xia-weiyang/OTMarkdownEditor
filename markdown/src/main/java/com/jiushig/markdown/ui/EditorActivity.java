@@ -70,6 +70,10 @@ public class EditorActivity extends BaseActivity {
         initViews();
 
         toolbar.setTitle(R.string.action_ot_edit);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void initViews() {
@@ -150,7 +154,11 @@ public class EditorActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            if (viewPager.getCurrentItem() == 1) {
+                viewPager.setCurrentItem(0);
+            }else {
+                finish();
+            }
         } else if (item.getItemId() == R.id.action_reference) {
             clickReference();
         } else if (item.getItemId() == R.id.action_save) {
@@ -158,6 +166,7 @@ public class EditorActivity extends BaseActivity {
         } else if (item.getItemId() == R.id.action_preview) {
             viewPager.setCurrentItem(1);
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -289,4 +298,6 @@ public class EditorActivity extends BaseActivity {
     protected void clickSave(String title, String text) {
 
     }
+
+
 }
