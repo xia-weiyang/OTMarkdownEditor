@@ -110,6 +110,14 @@
                 android:src="@drawable/selector_format_italic" />
 
             <ImageView
+                android:id="@+id/format_strike"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/selector_format_strike" />
+
+            <ImageView
                 android:id="@+id/format_quote"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -125,7 +133,13 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/selector_list" />
 
-
+            <!--<ImageView-->
+                <!--android:id="@+id/format_light"-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginStart="10dp"-->
+                <!--android:src="@drawable/selector_format_light" />-->
 
             <ImageView
                 android:id="@+id/format_header_1"

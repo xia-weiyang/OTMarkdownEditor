@@ -22,6 +22,7 @@ import com.jiushig.markdown.ui.adapter.ViewPagerAdapter;
 import com.jiushig.markdown.ui.fragment.EditorFragment;
 import com.jiushig.markdown.ui.fragment.PreviewFragment;
 import com.jiushig.markdown.utils.Log;
+import com.jiushig.markdown.utils.MarkdownUtils;
 import com.jiushig.markdown.utils.PermissionUtils;
 import com.jiushig.markdown.widget.MarkdownView;
 
@@ -296,7 +297,7 @@ public class EditorActivity extends BaseActivity {
      * @param text
      */
     protected void clickSave(String title, String text) {
-
+        Log.d(TAG, MarkdownUtils.getImgUrlFromMarkDownText(text).toString());
     }
 
 

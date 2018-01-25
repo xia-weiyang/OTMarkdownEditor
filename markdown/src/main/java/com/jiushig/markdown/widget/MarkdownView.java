@@ -9,6 +9,7 @@ import android.webkit.WebViewClient;
 
 import com.jiushig.markdown.utils.Log;
 import com.jiushig.markdown.utils.MarkdownHandler;
+import com.jiushig.markdown.utils.MarkdownUtils;
 
 import java.util.List;
 
@@ -43,11 +44,11 @@ public class MarkdownView extends WebView {
 
     public void setTextInBackground(String text) {
         this.text = text;
-        imgList = MarkdownHandler.getInstance().getImgUrls(text);
         MarkdownHandler.getInstance().toHtml(text, new MarkdownHandler.Callback() {
             @Override
             public void done(String html) {
                 if (html != null) {
+                    imgList = MarkdownUtils.getImgUrl(html);
                     loadDataWithBaseURL(null, html, "text/html", "utf8mb4", null);
                 }
             }
@@ -62,8 +63,9 @@ public class MarkdownView extends WebView {
     @Deprecated
     public void setText(String text) {
         this.text = text;
-        imgList = MarkdownHandler.getInstance().getImgUrls(text);
-        loadDataWithBaseURL(null, MarkdownHandler.getInstance().toHtml(text), "text/html", "utf8mb4", null);
+        String html = MarkdownHandler.getInstance().toHtml(text);
+        imgList = MarkdownUtils.getImgUrl(html);
+        loadDataWithBaseURL(null, html, "text/html", "utf8mb4", null);
     }
 
     public String getText() {

@@ -17,6 +17,8 @@ import java.util.regex.Pattern;
 
 public class MarkdownUtils {
 
+    private static final String TAG = MarkdownUtils.class.getSimpleName();
+
     /**
      * 获取真实文件路径
      *
@@ -48,12 +50,12 @@ public class MarkdownUtils {
     }
 
     /**
-     * 得到html标签中的图片地址
+     * 得到html标签中的链接地址
      *
      * @param html
      * @return
      */
-    public static List<String> getImgUrl(String html) {
+    public static List<String> getLinkUrl(String html) {
         List<String> list = new ArrayList<>();
         Pattern pattern = Pattern.compile("<a[^<]+</a>");
         Matcher matcher = pattern.matcher(html);
@@ -61,6 +63,54 @@ public class MarkdownUtils {
             Matcher ms = Pattern.compile("href=['\"].+['\"]").matcher(matcher.group());
             while (ms.find()) {
                 list.add(ms.group().replaceAll("['\"0]", "").replace("href=", ""));
+            }
+        }
+        return list;
+    }
+
+
+    /***
+     * 得到html标签中的图片地址
+     * @param html
+     * @return
+     */
+    public static List<String> getImgUrl(String html) {
+        List<String> list = new ArrayList<>();
+        Pattern pattern = Pattern.compile("<img.+?/>");
+        Matcher matcher = pattern.matcher(html);
+        while (matcher.find()) {
+            Matcher ms = Pattern.compile("src=['\"].+?['\"]").matcher(matcher.group());
+            while (ms.find()) {
+                list.add(ms.group().replaceAll("['\"0]", "").replace("src=", ""));
+            }
+        }
+        return list;
+    }
+
+
+    /**
+     * 匹配图片，用于上传图片
+     *
+     * 注意，仅仅匹配带有后缀名的图片url
+     *
+     * @param markText
+     * @return
+     */
+    public static List<String> getImgUrlFromMarkDownText(String markText) {
+        ArrayList<String> list = new ArrayList<>();
+//        !\[.*?\]\(.*?\)
+        Pattern pattern = Pattern.compile("!\\[.*?\\]\\(.*?\\..*?\\)");
+        Matcher matcher = pattern.matcher(markText);
+
+        while (matcher.find()) {
+            Matcher ms = Pattern.compile("\\(.+\\)").matcher(matcher.group());
+            while (ms.find()) {
+                String str = ms.group();
+                if (str.startsWith("("))
+                    str = str.substring(1, str.length());
+                if (str.endsWith(")"))
+                    str = str.substring(0, str.length() - 1);
+                list.add(str);
             }
         }
         return list;
