@@ -54,6 +54,8 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
         view.findViewById(R.id.format_header_5).setOnLongClickListener(this);
         view.findViewById(R.id.format_quote).setOnClickListener(this);
         view.findViewById(R.id.format_quote).setOnLongClickListener(this);
+        view.findViewById(R.id.format_strike).setOnClickListener(this);
+        view.findViewById(R.id.format_strike).setOnLongClickListener(this);
         view.findViewById(R.id.edit_img).setOnClickListener(this);
         view.findViewById(R.id.edit_img).setOnLongClickListener(this);
         view.findViewById(R.id.link).setOnClickListener(this);
@@ -96,10 +98,12 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
             addLink();
         } else if (v.getId() == R.id.list) {
             addList();
-        }else if (v.getId() == R.id.undo) {
+        } else if (v.getId() == R.id.undo) {
             performEdit.undo();
-        }else if (v.getId() == R.id.redo) {
+        } else if (v.getId() == R.id.redo) {
             performEdit.redo();
+        } else if (v.getId() == R.id.format_strike) {
+            addStrike();
         }
     }
 
@@ -127,10 +131,12 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
             Toast.makeText(activity, R.string.link, Toast.LENGTH_LONG).show();
         } else if (v.getId() == R.id.list) {
             Toast.makeText(activity, R.string.list, Toast.LENGTH_LONG).show();
-        }else if(v.getId() == R.id.undo){
+        } else if (v.getId() == R.id.undo) {
             Toast.makeText(activity, R.string.undo, Toast.LENGTH_LONG).show();
-        }else if(v.getId() == R.id.redo){
+        } else if (v.getId() == R.id.redo) {
             Toast.makeText(activity, R.string.redo, Toast.LENGTH_LONG).show();
+        } else if (v.getId() == R.id.format_strike) {
+            Toast.makeText(activity, R.string.format_strike, Toast.LENGTH_LONG).show();
         }
         return false;
     }
@@ -185,7 +191,12 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
     }
 
     public void addList() {
-        editText.getText().insert(editText.getSelectionStart(), "\n-");
+        editText.getText().insert(editText.getSelectionStart(), "\n- ");
+    }
+
+    public void addStrike() {
+        editText.getText().insert(editText.getSelectionStart(), "<del></del>");
+        editText.setSelection(editText.getSelectionStart() - 6);
     }
 
 }
