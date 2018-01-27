@@ -54,132 +54,13 @@
         android:overScrollMode="never">
 
         <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:clickable="true"
             android:orientation="horizontal"
             android:paddingEnd="10dp"
             android:paddingStart="10dp">
-
-            <ImageView
-                android:id="@+id/undo"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_undo" />
-
-            <ImageView
-                android:id="@+id/redo"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_redo" />
-
-            <ImageView
-                android:id="@+id/edit_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_edit_img" />
-
-            <ImageView
-                android:id="@+id/link"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_link" />
-
-            <ImageView
-                android:id="@+id/format_bold"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_format_bold" />
-
-            <ImageView
-                android:id="@+id/format_italic"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_format_italic" />
-
-            <ImageView
-                android:id="@+id/format_strike"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_format_strike" />
-
-            <ImageView
-                android:id="@+id/format_quote"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_format_quote" />
-
-            <ImageView
-                android:id="@+id/list"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_list" />
-
-            <!--<ImageView-->
-                <!--android:id="@+id/format_light"-->
-                <!--android:layout_width="30dp"-->
-                <!--android:layout_height="30dp"-->
-                <!--android:layout_gravity="center_vertical"-->
-                <!--android:layout_marginStart="10dp"-->
-                <!--android:src="@drawable/selector_format_light" />-->
-
-            <ImageView
-                android:id="@+id/format_header_1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_format_header_1" />
-
-            <ImageView
-                android:id="@+id/format_header_2"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_format_header_2" />
-
-            <ImageView
-                android:id="@+id/format_header_3"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_format_header_3" />
-
-            <ImageView
-                android:id="@+id/format_header_4"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_format_header_4" />
-
-            <ImageView
-                android:id="@+id/format_header_5"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/selector_format_header_5" />
 
         </LinearLayout>
 

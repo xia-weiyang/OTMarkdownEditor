@@ -1,12 +1,15 @@
 package com.jiushig.markdown.utils;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -90,7 +93,7 @@ public class MarkdownUtils {
 
     /**
      * 匹配图片，用于上传图片
-     *
+     * <p>
      * 注意，仅仅匹配带有后缀名的图片url
      *
      * @param markText
@@ -114,5 +117,16 @@ public class MarkdownUtils {
             }
         }
         return list;
+    }
+
+    /**
+     * 获得系统当前时间
+     *
+     * @return
+     */
+    @SuppressLint("SimpleDateFormat")
+    public static String getCurrentTime() {
+        SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        return mDateFormat.format(new Date());
     }
 }

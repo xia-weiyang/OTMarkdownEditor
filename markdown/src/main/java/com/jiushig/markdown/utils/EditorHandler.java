@@ -1,10 +1,17 @@
 package com.jiushig.markdown.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.jiushig.markdown.R;
@@ -19,12 +26,19 @@ import ren.qinc.edit.PerformEdit;
 
 public class EditorHandler implements View.OnClickListener, View.OnLongClickListener {
 
+    private static final String TAG = EditorHandler.class.getSimpleName();
+
     private Activity activity;
 
     private EditText editText;
     private View view;
 
+    private Toast toast;
+
     private PerformEdit performEdit;
+    private SharedPreferences preferences;
+
+    public static final String TAG_OPERATION = "ot_operation";
 
     public EditorHandler(Activity activity, View view, EditText editText) {
         this.editText = editText;
@@ -34,111 +48,113 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
         performEdit = new PerformEdit(editText);
         performEdit.setDefaultText(editText.getText());
 
+        preferences = activity.getSharedPreferences(TAG_OPERATION, Context.MODE_PRIVATE);
+
+        long time = System.currentTimeMillis();
+        initData();
         initView();
+        Log.d(TAG, "time:" + (System.currentTimeMillis() - time));
     }
 
     private void initView() {
-        view.findViewById(R.id.format_bold).setOnClickListener(this);
-        view.findViewById(R.id.format_bold).setOnLongClickListener(this);
-        view.findViewById(R.id.format_italic).setOnClickListener(this);
-        view.findViewById(R.id.format_italic).setOnLongClickListener(this);
-        view.findViewById(R.id.format_header_1).setOnClickListener(this);
-        view.findViewById(R.id.format_header_1).setOnLongClickListener(this);
-        view.findViewById(R.id.format_header_2).setOnClickListener(this);
-        view.findViewById(R.id.format_header_2).setOnLongClickListener(this);
-        view.findViewById(R.id.format_header_3).setOnClickListener(this);
-        view.findViewById(R.id.format_header_3).setOnLongClickListener(this);
-        view.findViewById(R.id.format_header_4).setOnClickListener(this);
-        view.findViewById(R.id.format_header_4).setOnLongClickListener(this);
-        view.findViewById(R.id.format_header_5).setOnClickListener(this);
-        view.findViewById(R.id.format_header_5).setOnLongClickListener(this);
-        view.findViewById(R.id.format_quote).setOnClickListener(this);
-        view.findViewById(R.id.format_quote).setOnLongClickListener(this);
-        view.findViewById(R.id.format_strike).setOnClickListener(this);
-        view.findViewById(R.id.format_strike).setOnLongClickListener(this);
-        view.findViewById(R.id.edit_img).setOnClickListener(this);
-        view.findViewById(R.id.edit_img).setOnLongClickListener(this);
-        view.findViewById(R.id.link).setOnClickListener(this);
-        view.findViewById(R.id.link).setOnLongClickListener(this);
-        view.findViewById(R.id.list).setOnClickListener(this);
-        view.findViewById(R.id.list).setOnLongClickListener(this);
-        view.findViewById(R.id.undo).setOnClickListener(this);
-        view.findViewById(R.id.undo).setOnLongClickListener(this);
-        view.findViewById(R.id.redo).setOnClickListener(this);
-        view.findViewById(R.id.redo).setOnLongClickListener(this);
+        LinearLayout linearLayout = view.findViewById(R.id.linear);
+
+        final LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        if (inflater == null) return;
+
+        // 简单排序
+        OperationType[] types = OperationType.values();
+        for (int i = 0; i < types.length; i++) {
+            for (int j = i + 1; j < types.length; j++) {
+                if (types[j].order > types[i].order) {
+                    OperationType type = types[i];
+                    types[i] = types[j];
+                    types[j] = type;
+                }
+            }
+        }
+
+        for (OperationType type : types) {
+            final FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.linear_item, linearLayout, false);
+            ImageView imageView = (ImageView) frameLayout.findViewById(R.id.imageView);
+            imageView.setVisibility(View.VISIBLE);
+            imageView.setOnClickListener(this);
+            imageView.setOnLongClickListener(this);
+            imageView.setTag(type.key);
+            imageView.setImageResource(type.src);
+            linearLayout.addView(frameLayout);
+        }
+
+    }
+
+    private void initData() {
+        for (OperationType type : OperationType.values()) {
+            int order = preferences.getInt(type.key, 0);
+            if (type.order < order)
+                type.order = order;
+        }
     }
 
     @Override
     public void onClick(View v) {
         editText.requestFocus();
 
-        if (v.getId() == R.id.edit_img) {
-            if (!PermissionUtils.storage(activity)) return;
-
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType("image/*");
-            activity.startActivityForResult(intent, EditorActivity.REQUEST_CODE_IMG);
-        } else if (v.getId() == R.id.format_bold) {
+        if (OperationType.IMG.key.equals(v.getTag())) {
+            openImg();
+        } else if (OperationType.BOLD.key.equals(v.getTag())) {
             addFormatBold();
-        } else if (v.getId() == R.id.format_italic) {
+        } else if (OperationType.ITALIC.key.equals(v.getTag())) {
             addFormatItalic();
-        } else if (v.getId() == R.id.format_header_1) {
+        } else if (OperationType.HEADER_1.key.equals(v.getTag())) {
             addFormatHeader1();
-        } else if (v.getId() == R.id.format_header_2) {
+        } else if (OperationType.HEADER_2.key.equals(v.getTag())) {
             addFormatHeader2();
-        } else if (v.getId() == R.id.format_header_3) {
+        } else if (OperationType.HEADER_3.key.equals(v.getTag())) {
             addFormatHeader3();
-        } else if (v.getId() == R.id.format_header_4) {
+        } else if (OperationType.HEADER_4.key.equals(v.getTag())) {
             addFormatHeader4();
-        } else if (v.getId() == R.id.format_header_5) {
+        } else if (OperationType.HEADER_5.key.equals(v.getTag())) {
             addFormatHeader5();
-        } else if (v.getId() == R.id.format_quote) {
+        } else if (OperationType.QUOTE.key.equals(v.getTag())) {
             addFormatQuote();
-        } else if (v.getId() == R.id.link) {
+        } else if (OperationType.LINK.key.equals(v.getTag())) {
             addLink();
-        } else if (v.getId() == R.id.list) {
+        } else if (OperationType.LIST.key.equals(v.getTag())) {
             addList();
-        } else if (v.getId() == R.id.undo) {
+        } else if (OperationType.UNDO.key.equals(v.getTag())) {
             performEdit.undo();
-        } else if (v.getId() == R.id.redo) {
+        } else if (OperationType.REDO.key.equals(v.getTag())) {
             performEdit.redo();
-        } else if (v.getId() == R.id.format_strike) {
+        } else if (OperationType.STRIKE.key.equals(v.getTag())) {
             addStrike();
+        } else if (OperationType.TIME.key.equals(v.getTag())) {
+            addTime();
+        }
+
+        for (OperationType type : OperationType.values()) {
+            if (type.key.equals(v.getTag())) {
+                type.order = type.order + 1;
+                preferences.edit().putInt(type.key, type.order).apply();
+            }
         }
     }
 
     @Override
     public boolean onLongClick(View v) {
-        if (v.getId() == R.id.edit_img) {
-            Toast.makeText(activity, R.string.edit_img, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.format_bold) {
-            Toast.makeText(activity, R.string.format_bold, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.format_italic) {
-            Toast.makeText(activity, R.string.format_italic, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.format_header_1) {
-            Toast.makeText(activity, R.string.format_header_1, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.format_header_2) {
-            Toast.makeText(activity, R.string.format_header_2, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.format_header_3) {
-            Toast.makeText(activity, R.string.format_header_3, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.format_header_4) {
-            Toast.makeText(activity, R.string.format_header_4, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.format_header_5) {
-            Toast.makeText(activity, R.string.format_header_5, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.format_quote) {
-            Toast.makeText(activity, R.string.format_quote, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.link) {
-            Toast.makeText(activity, R.string.link, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.list) {
-            Toast.makeText(activity, R.string.list, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.undo) {
-            Toast.makeText(activity, R.string.undo, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.redo) {
-            Toast.makeText(activity, R.string.redo, Toast.LENGTH_LONG).show();
-        } else if (v.getId() == R.id.format_strike) {
-            Toast.makeText(activity, R.string.format_strike, Toast.LENGTH_LONG).show();
+        for (OperationType type : OperationType.values()) {
+            if (type.key.equals(v.getTag())) {
+                showToast(type.describe);
+            }
         }
         return false;
+    }
+
+    public void openImg() {
+        if (!PermissionUtils.storage(activity)) return;
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        activity.startActivityForResult(intent, EditorActivity.REQUEST_CODE_IMG);
     }
 
     public void addImg(Uri uri) {
@@ -198,5 +214,22 @@ public class EditorHandler implements View.OnClickListener, View.OnLongClickList
         editText.getText().insert(editText.getSelectionStart(), "<del></del>");
         editText.setSelection(editText.getSelectionStart() - 6);
     }
+
+    public void addTime() {
+        editText.getText().insert(editText.getSelectionStart(), MarkdownUtils.getCurrentTime());
+    }
+
+
+    private void showToast(final int text) {
+        if (toast == null) {
+            toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);
+            toast.show();
+        } else {
+            toast.cancel();
+            toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
 
 }

@@ -157,7 +157,7 @@ public class EditorActivity extends BaseActivity {
         if (item.getItemId() == android.R.id.home) {
             if (viewPager.getCurrentItem() == 1) {
                 viewPager.setCurrentItem(0);
-            }else {
+            } else {
                 finish();
             }
         } else if (item.getItemId() == R.id.action_reference) {
@@ -188,7 +188,7 @@ public class EditorActivity extends BaseActivity {
         if (requestCode == PermissionUtils.REQUEST_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (editorFragment.editorHandler != null)
-                    editorFragment.editorHandler.onClick(findViewById(R.id.edit_img));
+                    editorFragment.editorHandler.openImg();
             } else {
                 Snackbar.make(findViewById(R.id.root), R.string.sd_fail, Snackbar.LENGTH_LONG).show();
             }
@@ -233,7 +233,7 @@ public class EditorActivity extends BaseActivity {
     /**
      * 打开软键盘
      */
-    public void showKeyboard(){
+    public void showKeyboard() {
         showKeyboard(editorFragment.editText);
     }
 

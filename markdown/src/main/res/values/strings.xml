@@ -17,6 +17,7 @@
     <string name="format_quote">文字引用</string>
     <string name="format_strike">删除线</string>
     <string name="undo">撤销</string>
+    <string name="ot_time">当前时间</string>
     <string name="redo">前进</string>
     <string name="link">链接</string>
     <string name="list">无序列表</string>
