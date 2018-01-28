@@ -25,7 +25,7 @@ allprojects {
 Add the dependency
 ```gradle
 dependencies {
-        compile 'com.github.xia-weiyang:OTMarkdownEditor:1.1.beta7'
+        compile 'com.github.xia-weiyang:OTMarkdownEditor:1.1.beta8'
 }
 ```
 
