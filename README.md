@@ -10,7 +10,7 @@ For [旧时光](http://jiushig.com)
 
 ## Setup
 
-To use this library your `minSdkVersion` must be >= 19
+To use this library your `minSdkVersion` should be >= 19
 
 Add it in your root build.gradle at the end of repositories
 
@@ -25,7 +25,7 @@ allprojects {
 Add the dependency
 ```gradle
 dependencies {
-        compile 'com.github.xia-weiyang:OTMarkdownEditor:1.1.beta3'
+        compile 'com.github.xia-weiyang:OTMarkdownEditor:1.1.beta7'
 }
 ```
 
