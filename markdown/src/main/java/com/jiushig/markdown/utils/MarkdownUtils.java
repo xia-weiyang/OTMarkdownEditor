@@ -65,7 +65,7 @@ public class MarkdownUtils {
         while (matcher.find()) {
             Matcher ms = Pattern.compile("href=['\"].+['\"]").matcher(matcher.group());
             while (ms.find()) {
-                list.add(ms.group().replaceAll("['\"0]", "").replace("href=", ""));
+                list.add(ms.group().replaceAll("['\"]", "").replace("href=", ""));
             }
         }
         return list;
@@ -84,7 +84,7 @@ public class MarkdownUtils {
         while (matcher.find()) {
             Matcher ms = Pattern.compile("src=['\"].+?['\"]").matcher(matcher.group());
             while (ms.find()) {
-                list.add(ms.group().replaceAll("['\"0]", "").replace("src=", ""));
+                list.add(ms.group().replaceAll("['\"]", "").replace("src=", ""));
             }
         }
         return list;
